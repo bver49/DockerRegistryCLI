@@ -5,6 +5,7 @@ var registryApi = '';
 var token = '';
 var user = '';
 var pw = '';
+var backupAmt = 2;
 
 var api = axios.create({
   baseURL: registryApi,
@@ -83,7 +84,7 @@ function getOldImage(imageList) {
     var oldImageObj = {}
     var oldImageList = [];
     imageList.map(function(image) {
-      if (image.tags != null && image.tags.length > 2) {
+      if (image.tags != null && image.tags.length > backupAmt) {
         image.tags.map(function(tag) {
           unOrderImage.push(`${image.name}:${tag}`);
         });
