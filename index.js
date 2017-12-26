@@ -3,6 +3,8 @@ var chalk = require('chalk');
 var inquirer = require('inquirer');
 var registryApi = '';
 var token = '';
+var user = '';
+var pw = '';
 
 var api = axios.create({
   baseURL: registryApi,
@@ -119,19 +121,6 @@ function getOldImage(imageList) {
   });
 }
 
-var chooseFn = [{
-  type: 'list',
-  name: 'function',
-  message: '選擇功能',
-  choices: ['列出所有Image', '刪除Image', '清理Registry']
-}]
-
-var chooseImage = [{
-  type: 'checkbox',
-  name: 'image',
-  message: '選擇要刪除的Image'
-}]
-
 function showAllImage() {
   getAllImage().then(function(imageList) {
     for (var i in imageList) {
@@ -192,8 +181,19 @@ var inputPw = [{
   message: '請輸入Registry密碼'
 }]
 
-var user = '';
-var pw = '';
+var chooseFn = [{
+  type: 'list',
+  name: 'function',
+  message: '選擇功能',
+  choices: ['列出所有Image', '刪除Image', '清理Registry']
+}]
+
+var chooseImage = [{
+  type: 'checkbox',
+  name: 'image',
+  message: '選擇要刪除的Image'
+}]
+
 inquirer.prompt(inputUser).then(function(answer) {
   user = answer.user;
   inquirer.prompt(inputPw).then(function(answer) {
