@@ -85,7 +85,7 @@ function getOldImage(imageList) {
     imageList.map(function(image) {
       if (image.tags != null && image.tags.length > 2) {
         image.tags.map(function(tag) {
-          extraImage.push(`${image.name}:${tag}`);
+          unOrderImage.push(`${image.name}:${tag}`);
         });
       }
     });
