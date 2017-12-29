@@ -126,8 +126,15 @@ function showAllImage() {
   getAllImage().then(function(imageList) {
     for (var i in imageList) {
       if (imageList[i].tags != null) {
-        for (var j in imageList[i].tags) {
-          console.log(chalk.blue(`${imageList[i].name}:${imageList[i].tags[j]}`));
+        if (imageList[i].tags.length == 2 && imageList[i].tags.indexOf('latest') != -1) {
+          console.log(chalk.blue(`${imageList[i].name}:${imageList[i].tags[1-imageList[i].tags.indexOf('latest')]}`));
+        } else if (imageList[i].tags.length >= 2) {
+          for (var j in imageList[i].tags) {
+            if (imageList[i].tags[j] != 'latest') 
+            console.log(chalk.blue(`${imageList[i].name}:${imageList[i].tags[j]}`));
+          }
+        } else {
+          console.log(chalk.blue(`${imageList[i].name}:${imageList[i].tags[0]}`));
         }
       }
     }
@@ -136,11 +143,18 @@ function showAllImage() {
 
 function showDeleteOption() {
   getAllImage().then(function(imageList) {
-    chooseImage[0].choices = [];
-    for (var i in imageList) {
-      if (imageList[i].tags != null) {
-        for (var j in imageList[i].tags) {
-          chooseImage[0].choices.push(`${imageList[i].name}:${imageList[i].tags[j]}`);
+      chooseImage[0].choices = [];
+      for (var i in imageList) {
+        if (imageList[i].tags != null) {
+          if (imageList[i].tags.length == 2 && imageList[i].tags.indexOf('latest') != -1) {
+            chooseImage[0].choices.push(`${imageList[i].name}:${imageList[i].tags[1-imageList[i].tags.indexOf('latest')]}`);
+          } else if (imageList[i].tags.length >= 2) {
+            for (var j in imageList[i].tags) {
+              if (imageList[i].tags[j] != 'latest') 
+              chooseImage[0].choices.push(`${imageList[i].name}:${imageList[i].tags[j]}`);
+            }
+          } else {
+            chooseImage[0].choices.push(`${imageList[i].name}:${imageList[i].tags[0]}`);
         }
       }
     }
