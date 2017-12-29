@@ -143,18 +143,18 @@ function showAllImage() {
 
 function showDeleteOption() {
   getAllImage().then(function(imageList) {
-      chooseImage[0].choices = [];
-      for (var i in imageList) {
-        if (imageList[i].tags != null) {
-          if (imageList[i].tags.length == 2 && imageList[i].tags.indexOf('latest') != -1) {
-            chooseImage[0].choices.push(`${imageList[i].name}:${imageList[i].tags[1-imageList[i].tags.indexOf('latest')]}`);
-          } else if (imageList[i].tags.length >= 2) {
-            for (var j in imageList[i].tags) {
-              if (imageList[i].tags[j] != 'latest') 
+    chooseImage[0].choices = [];
+    for (var i in imageList) {
+      if (imageList[i].tags != null) {
+        if (imageList[i].tags.length == 2 && imageList[i].tags.indexOf('latest') != -1) {
+          chooseImage[0].choices.push(`${imageList[i].name}:${imageList[i].tags[1-imageList[i].tags.indexOf('latest')]}`);
+        } else if (imageList[i].tags.length >= 2) {
+          for (var j in imageList[i].tags) {
+            if (imageList[i].tags[j] != 'latest')
               chooseImage[0].choices.push(`${imageList[i].name}:${imageList[i].tags[j]}`);
-            }
-          } else {
-            chooseImage[0].choices.push(`${imageList[i].name}:${imageList[i].tags[0]}`);
+          }
+        } else {
+          chooseImage[0].choices.push(`${imageList[i].name}:${imageList[i].tags[0]}`);
         }
       }
     }
